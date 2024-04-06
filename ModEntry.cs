@@ -9,6 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using StardewValley.Menus;
+using BetterBuildMenu.Framework.UI;
+using System.Reflection;
 
 namespace BetterBuildMenu
 {
@@ -51,7 +54,7 @@ namespace BetterBuildMenu
                 return;
             }
 
-            // Hook into GameLoop events
+            helper.Events.Display.MenuChanged += this.OnMenuChanged;
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
         }
 
@@ -66,6 +69,16 @@ namespace BetterBuildMenu
 
 
                 configApi.AddSectionTitle(ModManifest, I18n.Config_BetterBuildMenu_Title);
+            }
+        }
+
+        private void OnMenuChanged(object sender, MenuChangedEventArgs e)
+        {
+            if (e.NewMenu is CarpenterMenu)
+            {
+                string builder = Helper.Reflection.GetField<string>(e.NewMenu, "Builder").GetValue();
+
+                Game1.activeClickableMenu = new BBM(builder, monitor);
             }
         }
     }

@@ -1,7 +1,7 @@
 {
   "Name": "Better Build Menu",
   "Author": "Espy",
-  "Version": "0.0.1",
+  "Version": "0.0.2",
   "Description": "Replaces the vanilla build menu.",
   "UniqueID": "Espy.BetterBuildMenu",
   "EntryDll": "BetterBuildMenu.dll",
